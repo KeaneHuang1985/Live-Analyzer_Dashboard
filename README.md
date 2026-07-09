@@ -1,20 +1,22 @@
-📡 RF Base Station Live Analyzer
+# **📡 RF Base Station Live Analyzer**
 A real-time monitoring and visualization dashboard for RF Base Station.
 RF Live Analyzer is a Streamlit-based web application designed to monitor, analyze, and visualize Base Station runtime information in real time. It connects to the RF log streaming service through WebSocket, parses incoming events, and presents them in an intuitive dashboard for debugging, performance analysis, and system monitoring.
-________________________________________
-Features
-•	📈 Real-time Dashboard
-•	📡 Live WebSocket Log Streaming
-•	📊 RF & PHY Visualization
-•	📶 Power Control Monitoring
-•	📋 ED Status Monitoring
-•	📦 Traffic Statistics
-•	🔄 FSM (Finite State Machine) State Statistics 
-•	📑 Event Log Viewer
-•	⚡ Automatic Refresh using st.fragment
-•	🧩 Modular Page Architecture
-________________________________________
-System Architecture
+---
+## **Features**
+-	📈 Real-time Dashboard
+-	📡 Live WebSocket Log Streaming
+-	📊 RF & PHY Visualization
+-	📶 Power Control Monitoring
+-	📋 ED Status Monitoring
+-	📦 Traffic Statistics
+-	🔄 FSM (Finite State Machine) State Statistics 
+-	📑 Event Log Viewer
+-	⚡ Automatic Refresh using st.fragment
+-	🧩 Modular Page Architecture
+---
+## **System Architecture**
+```text
+
                          RF
                             │
                        Runtime Logs
@@ -37,8 +39,10 @@ System Architecture
                     Streamlit Dashboard
                               │
                  Individual Pages (Fragment)
-________________________________________
-Project Structure
+```
+---
+## **Project Structure**
+```text
 RF Live Analyzer
 │
 ├── app.py                     # Streamlit entry point
@@ -69,11 +73,12 @@ RF Live Analyzer
 │   ├── queue_manager.py
 │   └── render_helper.py
 │
-├── server.py                  # WebSocket log server
-│
-└── requirements.txt
-________________________________________
-Data Flow
+└── server.py                  # WebSocket log server
+```
+---
+## **Data Flow**
+
+'''text
 WebSocket
      │
      ▼
@@ -96,149 +101,154 @@ Visualization Module
      │
      ▼
 Dashboard
-________________________________________
-Dashboard Pages
-Overview
+'''
+---
+## **Dashboard Pages**
+### Overview
 Displays the overall health of the Base Station.
 Typical widgets include:
-•	Connected ED
-•	Current SFN
-•	Queue Status
-•	WebSocket Status
-•	Throughput Summary
-________________________________________
-ED Status
+-	Connected ED
+-	Current SFN
+-	Queue Status
+-	WebSocket Status
+-	Throughput Summary
+
+---
+## **ED Status**
 Displays all registered End Devices.
 Information includes:
-•	ED ID
-•	Connection State
-•	Connection Rate
-•	Session Statistics
-•	UL / DL Bytes
-•	Registration Status
-________________________________________
-PHY RX Request
+-	ED ID
+-	Connection State
+-	Connection Rate
+-	Session Statistics
+-	UL / DL Bytes
+-	Registration Status
+---
+## **PHY RX Request**
 Visualizes PHY RX scheduling information.
 Features:
-•	Resource Grid
-•	Slot Allocation
-•	Channel Usage
-•	SFN Timeline
-•	PHY RX Events
-________________________________________
-RF Scheduler
+-	Resource Grid
+-	Slot Allocation
+-	Channel Usage
+-	SFN Timeline
+-	PHY RX Events
+---
+## **RF Scheduler**
 Provides RF scheduling analysis.
 Including:
-•	RSSI Distribution
-•	Scheduler Reference RSSI
-•	Resource Allocation
-•	UL Scheduling Statistics
-________________________________________
-Finite State Machine Statistics
+-	RSSI Distribution
+-	Scheduler Reference RSSI
+-	Resource Allocation
+-	UL Scheduling Statistics
+---
+## **Finite State Machine Statistics**
 Displays PHY FSM decoding statistics.
 Typical metrics:
-•	IDLE  
-•	PRE0 
-•	SFD0
-•	SFD1
-•	PAYLOAD
-•	Decode Success Rate
-•	Channel Statistics
-________________________________________
-Power Control
+-	IDLE  
+-	PRE0 
+-	SFD0
+-	SFD1
+-	PAYLOAD
+-	Decode Success Rate
+-	Channel Statistics
+---
+## **Power Control**
 Monitors RF Power Control behavior.
 Displays:
-•	Link Power
-•	UL RSSI
-•	MCS
-•	Power Offset
-•	Waste Statistics
-•	Historical Trend
-________________________________________
-Traffic
+-	Link Power
+-	UL RSSI
+-	MCS
+-	Power Offset
+-	Waste Statistics
+-	Historical Trend
+---
+## **Traffic**
 Traffic analysis dashboard.
 Including:
-•	UL Bytes
-•	DL Bytes
-•	Throughput
-•	Top Talkers
-•	Session Statistics
-________________________________________
-Event Log
+-	UL Bytes
+-	DL Bytes
+-	Throughput
+-	Top Talkers
+-	Session Statistics
+---
+## **Event Log**
 Displays recent runtime events.
 Examples:
-•	Scheduler Events
-•	Registration
-•	Deregistration
-•	Warning
-•	Error
-•	RF Events
-________________________________________
-System Status
+-	Scheduler Events
+-	Registration
+-	Deregistration
+-	Warning
+-	Error
+-	RF Events
+---
+## **System Status**
 System runtime information.
 Typical metrics:
-•	Queue Length
-•	WebSocket Connection
-•	Background Thread
-•	Memory Usage
-•	Processing Rate
-________________________________________
-Core Components
+-	Queue Length
+-	WebSocket Connection
+-	Background Thread
+-	Memory Usage
+-	Processing Rate
+---
+## **Core Components**
 WebSocket Client
 Responsible for:
-•	Receiving runtime events
-•	Automatic reconnect
-•	JSON decoding
-________________________________________
-Background Consumer
+-	Receiving runtime events
+-	Automatic reconnect
+-	JSON decoding
+---
+## **Background Consumer**
 Responsible for:
-•	Queue processing
-•	Event classification
-•	Data normalization
-•	Updating GlobalDataCenter
-________________________________________
-GlobalDataCenter
+-	Queue processing
+-	Event classification
+-	Data normalization
+-	Updating GlobalDataCenter
+---
+## **GlobalDataCenter**
 Acts as the in-memory data repository shared across all dashboard pages.
 Responsibilities include:
-•	Thread-safe data storage
-•	Maintaining recent history
-•	Providing query interfaces
-•	Supporting real-time visualization
-________________________________________
-Streamlit Fragment
+-	Thread-safe data storage
+-	Maintaining recent history
+-	Providing query interfaces
+-	Supporting real-time visualization
+---
+## **Streamlit Fragment**
 Each dashboard page updates independently using:
+```text
 @st.fragment(run_every="6s")
+```
 Benefits:
-•	Partial page refresh
-•	Lower CPU usage
-•	Better responsiveness
-•	Independent dashboard updates
-________________________________________
-Design Philosophy
+-	Partial page refresh
+-	Lower CPU usage
+-	Better responsiveness
+-	Independent dashboard updates
+
+---
+## **Design Philosophy**
 The project follows a modular architecture.
-•	Core handles data acquisition and storage.
-•	Modules focus on visualization.
-•	Pages organize the user interface.
-•	GlobalDataCenter provides a shared, thread-safe data source.
+-	Core handles data acquisition and storage.
+-	Modules focus on visualization.
+-	Pages organize the user interface.
+-	GlobalDataCenter provides a shared, thread-safe data source.
 This separation keeps the application easy to maintain and simplifies adding new dashboards or event types.
-________________________________________
-Requirements
-•	Python 3.11+
-•	Streamlit 1.58+
-•	pandas
-•	plotly
-•	FastAPI
-•	websocket-client
-________________________________________
-Future Improvements
-•	SQLite event history
-•	Historical trend analysis
-•	User-configurable dashboard layouts
-•	Alert and notification system
-•	Export to CSV / Excel
-•	Performance profiling
-•	Multi-Base Station support
-•	Dashboard authentication
-________________________________________
+---
+## **Requirements**
+-	Python 3.11+
+-	Streamlit 1.58+
+-	pandas
+-	plotly
+-	FastAPI
+-	websocket-client
+---
+## **Future Improvements**
+-	SQLite event history
+-	Historical trend analysis
+-	User-configurable dashboard layouts
+-	Alert and notification system
+-	Export to CSV / Excel
+-	Performance profiling
+-	Multi-Base Station support
+-	Dashboard authentication
+---
 License
 Internal project for RF monitoring and analysis.
