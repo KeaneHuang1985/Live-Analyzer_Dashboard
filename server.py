@@ -1,21 +1,18 @@
 import asyncio
 import time
 import json
-import os  # 1. 引入 os 模組
+import os  
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import paramiko
-
-# 引入剛剛建立的 Parser Class 
 from parser.CustomParser import LogParser
 
 app = FastAPI()
-
 # ==========================================
 # remote SSH connection configuration
 # ==========================================
 # Windows (Command Prompt / cmd)
 #   set SSH_HOST=IP_ADDRESS
-#   set SSH_PASSWORD=你的真實密碼
+#   set SSH_PASSWORD=PASSWORD
 #   python server.py
 # Windows (PowerShell)
 #   $env:SSH_HOST=IP_ADDRESS
