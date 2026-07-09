@@ -104,9 +104,6 @@ Visualization Module
 Dashboard
 ```
 ### How to Run the server 
-# ==========================================
-# remote SSH connection configuration
-# ==========================================
 
 #### Windows (Command Prompt / cmd)
 ```text
