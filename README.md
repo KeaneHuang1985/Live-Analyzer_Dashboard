@@ -105,26 +105,31 @@ Dashboard
 ```
 ### How to Run the server 
 
-#### Windows (Command Prompt / cmd)
+Windows (Command Prompt / cmd)
 ```text
 set SSH_HOST=IP_ADDRESS
 set SSH_PASSWORD=PASSWORD
 python server.py
-ˋˋˋ
-#### Windows (PowerShell)
-ˋˋˋtext
+```
+
+
+Windows (PowerShell)
+```text
    $env:SSH_HOST=IP_ADDRESS
    $env:SSH_PASSWORD=PASSWORD
    python server.py
-ˋˋˋ
-#### Linux / macOS
-ˋˋˋtext
+```
+
+Linux / macOS
+```text
 export SSH_HOST=IP_ADDRESS
 export SSH_PASSWORD=PASSWORD
-ˋˋˋ
-### How to Run the app (front end)
 ```
-# streamlit run app.py
+
+
+### How to Run the app (front end)
+```text
+streamlit run app.py
 ```
 ---
 ## **Dashboard Pages**
