@@ -78,7 +78,7 @@ RF Live Analyzer
 ---
 ## **Data Flow**
 
-'''text
+```text
 WebSocket
      │
      ▼
@@ -101,7 +101,7 @@ Visualization Module
      │
      ▼
 Dashboard
-'''
+```
 ---
 ## **Dashboard Pages**
 ### Overview
