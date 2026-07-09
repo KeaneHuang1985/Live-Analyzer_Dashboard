@@ -40,6 +40,7 @@ RF Live Analyzer is a Streamlit-based web application designed to monitor, analy
                               │
                  Individual Pages (Fragment)
 ```
+
 ---
 ## **Project Structure**
 ```text
@@ -101,6 +102,28 @@ Visualization Module
      │
      ▼
 Dashboard
+```
+### How to Run the server 
+```text
+# ==========================================
+# remote SSH connection configuration
+# ==========================================
+# Windows (Command Prompt / cmd)
+#   set SSH_HOST=IP_ADDRESS
+#   set SSH_PASSWORD=你的真實密碼
+#   python server.py
+# Windows (PowerShell)
+#   $env:SSH_HOST=IP_ADDRESS
+#   $env:SSH_PASSWORD=PASSWORD
+#   python server.py
+# Linux / macOS
+#   export SSH_HOST=IP_ADDRESS
+#   export SSH_PASSWORD=PASSWORD
+# ==========================================
+```
+### How to Run the app (front end)
+```
+# streamlit run app.py
 ```
 ---
 ## **Dashboard Pages**
