@@ -104,23 +104,27 @@ Visualization Module
 Dashboard
 ```
 ### How to Run the server 
-```text
 # ==========================================
 # remote SSH connection configuration
 # ==========================================
-# Windows (Command Prompt / cmd)
-#   set SSH_HOST=IP_ADDRESS
-#   set SSH_PASSWORD=你的真實密碼
-#   python server.py
-# Windows (PowerShell)
-#   $env:SSH_HOST=IP_ADDRESS
-#   $env:SSH_PASSWORD=PASSWORD
-#   python server.py
-# Linux / macOS
-#   export SSH_HOST=IP_ADDRESS
-#   export SSH_PASSWORD=PASSWORD
-# ==========================================
-```
+
+#### Windows (Command Prompt / cmd)
+```text
+set SSH_HOST=IP_ADDRESS
+set SSH_PASSWORD=PASSWORD
+python server.py
+ˋˋˋ
+#### Windows (PowerShell)
+ˋˋˋtext
+   $env:SSH_HOST=IP_ADDRESS
+   $env:SSH_PASSWORD=PASSWORD
+   python server.py
+ˋˋˋ
+#### Linux / macOS
+ˋˋˋtext
+export SSH_HOST=IP_ADDRESS
+export SSH_PASSWORD=PASSWORD
+ˋˋˋ
 ### How to Run the app (front end)
 ```
 # streamlit run app.py
