@@ -5,6 +5,15 @@ def dispatch_event(item):
     event = item.get("event")
     print(f"dispatch to data coneter: {event}")
     match event:
+        
+        case 'BBG_SAMPLE':
+            data_center.append_bbg_sample(item)
+        
+        case 'FOI_SAMPLE':
+            data_center.append_foi_sample(item)
+        
+        case 'TOA_SAMPLE':
+            data_center.append_toa_sample(item)
 
         case 'ED_STATUS':
             data_center.append_ed_status(item)
@@ -47,7 +56,7 @@ def ll_lch_message_merge(event_name,item):
         case 'll_lch_nack':
                 ed_id = item.get("ed_id")
                 if ed_id is not None:
-                    fsm_status = data_center.tx_fsm_status.get(ed_id) 
+                    fsm_status = data_center.tx_fsm_status.get(ed_id,{}) 
                     fsm_status[ed_id] = {
                         "timestamp": item.get("last_update_datetime"),
                         "state": "🟠 NACK_RETRANSMIT",
@@ -60,7 +69,7 @@ def ll_lch_message_merge(event_name,item):
         case 'll_lch_tx_window_empty':          
             ed_id = item.get("ed_id")
             if ed_id is not None:
-                fsm_status = data_center.tx_fsm_status.get(ed_id) 
+                fsm_status = data_center.tx_fsm_status.get(ed_id ,{}) 
                 fsm_status[ed_id] = {
                     "timestamp": item.get("last_update_datetime"),
                     "state": "🟢 WINDOW_EMPTY",
