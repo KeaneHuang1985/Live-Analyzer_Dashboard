@@ -135,6 +135,27 @@ class LogParser:
             r"\[BPD Type:(?P<bpd_type>\w+)\]"
             r"\[FSM_ST_MAX:(?P<ch0>\d+):(?P<ch1>\d+):(?P<ch2>\d+):(?P<ch3>\d+):(?P<ch4>\d+):(?P<ch5>\d+):(?P<ch6>\d+):(?P<ch7>\d+)\]"
         )
+
+        self.mini_dcu_rssi_raw_pattern = re.compile(
+            r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
+            r"\[RSSI_raw\:(?P<ch0>-?\d+)\:(?P<ch1>-?\d+)\:(?P<ch2>-?\d+)\:(?P<ch3>-?\d+)\:(?P<ch4>-?\d+)\:(?P<ch5>-?\d+)\:(?P<ch6>-?\d+)\:(?P<ch7>-?\d+)\]"
+        )
+
+        self.mini_dcu_foi_pattern = re.compile(
+            r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
+            r"\[FOI:(?P<ch0>\d+)\:(?P<ch1>\d+)\:(?P<ch2>\d+)\:(?P<ch3>\d+)\:(?P<ch4>\d+)\:(?P<ch5>\d+)\:(?P<ch6>\d+)\:(?P<ch7>\d+)\]"
+        )
+
+        self.mini_dcu_toa_pattern = re.compile(
+            r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
+            r"\[TOA:(?P<ch0>\d+)\:(?P<ch1>\d+)\:(?P<ch2>\d+)\:(?P<ch3>\d+)\:(?P<ch4>\d+)\:(?P<ch5>\d+)\:(?P<ch6>\d+)\:(?P<ch7>\d+)\]"
+        )
+
+        self.mini_dcu_bbg_pattern = re.compile(
+            r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
+            r"\[BBG:(?P<ch0>\d+)\:(?P<ch1>\d+)\:(?P<ch2>\d+)\:(?P<ch3>\d+)\:(?P<ch4>\d+)\:(?P<ch5>\d+)\:(?P<ch6>\d+)\:(?P<ch7>\d+)\]"
+        )
+        
         self.BB_SCHED_RE = re.compile(
             r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
             r"\[SFN:(?P<sfn>\d+)\]"
