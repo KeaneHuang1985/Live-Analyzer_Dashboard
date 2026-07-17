@@ -14,6 +14,9 @@ class GlobalDataCenter:
         self.ed_status = pd.DataFrame()
         self.ed_start_time = {}
         self.fsm_events = deque(maxlen=50000)
+        self.foi_sample = deque(maxlen=50000)
+        self.bbg_sample = deque(maxlen=50000)
+        self.toa_sample = deque(maxlen=50000)
         self.pwr_status = {}
         self.power_ctrl_latest = {}
         self.power_ctrl_events = deque(maxlen=50000)
@@ -38,6 +41,15 @@ class GlobalDataCenter:
     def get_fsm_list(self):
         with self.lock:
             return list(self.fsm_events)
+    def get_foi_sample(self):
+        with self.lock:
+            return list(self.foi_sample)
+    def get_bbg_sample(self):
+        with self.lock:
+            return list(self.bbg_sample)
+    def get_toa_sample(self):
+        with self.lock:
+            return list(self.toa_sample)
     def get_pwr_status_vals(self):
         with self.lock:
             return list(self.pwr_status.values())
