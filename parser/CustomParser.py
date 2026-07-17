@@ -155,7 +155,7 @@ class LogParser:
             r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
             r"\[BBG:(?P<ch0>\d+)\:(?P<ch1>\d+)\:(?P<ch2>\d+)\:(?P<ch3>\d+)\:(?P<ch4>\d+)\:(?P<ch5>\d+)\:(?P<ch6>\d+)\:(?P<ch7>\d+)\]"
         )
-        
+
         self.BB_SCHED_RE = re.compile(
             r"\[(?P<date>\d{8})\s(?P<time>\d{2}:\d{2}:\d{2}\.\d+)\].*?"
             r"\[SFN:(?P<sfn>\d+)\]"
@@ -182,6 +182,14 @@ class LogParser:
         
         if "FSM_ST_MAX" in line:
             event = self._parse_gct_fsm_pattern_line(line)
+        
+        if "PHY_RX Stats" in line:
+            if "FOI" in line:
+                event = self._parse_gct_foi_pattern_line(line)
+            elif "BBG" in line:
+                event = self._parse_gct_bbg_pattern_line(line)
+            elif "TOA" in line:
+                event = self._parse_gct_toa_pattern_line(line)
         
         if "NB_UL_RSSI" in line and "LINK_PWR" in line and 'MIN' in line:
             row = self._parse_power_ctrl(line)
@@ -443,6 +451,67 @@ class LogParser:
             "subchannel_6": subchannels[6],
             "subchannel_7": subchannels[7],
         }
+
+    def _parse_gct_bbg_pattern_line(self, line: str) -> dict:
+        m = self.mini_dcu_bbg_pattern.search(line)
+        if not m:
+            return None   
+        ts_str = f"{m.group('date')} {m.group('time')}"
+        subchannels = [int(m.group(f'ch{i}')) for i in range(8)]
+        return {
+            "timestamp": datetime.strptime(ts_str, "%Y%m%d %H:%M:%S.%f"),
+            "event": "BBG_SAMPLE",
+            "ed_id": "UNKNOWN",
+            "subchannel_0": subchannels[0],
+            "subchannel_1": subchannels[1],
+            "subchannel_2": subchannels[2],
+            "subchannel_3": subchannels[3],
+            "subchannel_4": subchannels[4],
+            "subchannel_5": subchannels[5],
+            "subchannel_6": subchannels[6],
+            "subchannel_7": subchannels[7],
+        }
+    
+    def _parse_gct_foi_pattern_line(self, line: str) -> dict:
+        m = self.mini_dcu_foi_pattern.search(line)
+        if not m:
+            return None   
+        ts_str = f"{m.group('date')} {m.group('time')}"
+        subchannels = [int(m.group(f'ch{i}')) for i in range(8)]
+        return {
+            "timestamp": datetime.strptime(ts_str, "%Y%m%d %H:%M:%S.%f"),
+            "event": "FOI_SAMPLE",
+            "ed_id": "UNKNOWN",
+            "subchannel_0": subchannels[0],
+            "subchannel_1": subchannels[1],
+            "subchannel_2": subchannels[2],
+            "subchannel_3": subchannels[3],
+            "subchannel_4": subchannels[4],
+            "subchannel_5": subchannels[5],
+            "subchannel_6": subchannels[6],
+            "subchannel_7": subchannels[7],
+        }
+
+    def _parse_gct_toa_pattern_line(self, line: str) -> dict:
+        m = self.mini_dcu_toa_pattern.search(line)
+        if not m:
+            return None   
+        ts_str = f"{m.group('date')} {m.group('time')}"
+        subchannels = [int(m.group(f'ch{i}')) for i in range(8)]
+        return {
+            "timestamp": datetime.strptime(ts_str, "%Y%m%d %H:%M:%S.%f"),
+            "event": "TOA_SAMPLE",
+            "ed_id": "UNKNOWN",
+            "subchannel_0": subchannels[0],
+            "subchannel_1": subchannels[1],
+            "subchannel_2": subchannels[2],
+            "subchannel_3": subchannels[3],
+            "subchannel_4": subchannels[4],
+            "subchannel_5": subchannels[5],
+            "subchannel_6": subchannels[6],
+            "subchannel_7": subchannels[7],
+        }
+
 
     def _parse_bb_sched(self, line: str) -> dict:
         m = self.BB_SCHED_RE.search(line)
